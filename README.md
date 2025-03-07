@@ -1,4 +1,4 @@
-# Dawei Kickstart Shopify Template
+# Davy Shopify Theme
 
 A modern, fully customizable Shopify theme designed for optimal performance and user experience. Built with Online Store 2.0 features and best practices, this theme provides a solid foundation for building beautiful e-commerce stores.
 

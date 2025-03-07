@@ -58,24 +58,6 @@ A modern, fully customizable Shopify theme designed for optimal performance and 
 - **JS Variables**: Global JavaScript configuration
 - **Meta Tags**: SEO and social sharing optimization
 
-## Getting Started
-
-1. Install the Shopify CLI:
-   ```bash
-   npm install -g @shopify/cli @shopify/theme
-   ```
-
-2. Clone and install:
-   ```bash
-   git clone [repository-url]
-   cd dawei-kickstart-shopify-template
-   npm install
-   ```
-
-3. Start development:
-   ```bash
-   shopify theme dev
-   ```
 
 ## Customization
 

@@ -1,0 +1,61 @@
+{% style %}
+  :root {
+
+    --font-body-family: {{ settings.body_font.family }}, {{ settings.body_font.fallback_families }};
+    --font-heading-family: {{ settings.heading_font.family }}, {{ settings.heading_font.fallback_families }};
+
+
+    --color-primary: {{ settings.primary_color }};
+    --color-secondary: {{ settings.secondary_color }};
+    --color-background: {{ settings.background_color | default: '#FFFFFF' }};
+    --color-text: {{ settings.text_color | default: '#000000' }};
+
+
+    --page-width: {{ settings.page_width | default: '1200' }}px;
+    --grid-gutter: 2rem;
+
+
+    --font-body-scale: {{ settings.body_scale | default: '1.0' }};
+    --font-heading-scale: {{ settings.heading_scale | default: '1.0' }};
+  }
+
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+
+  body {
+    margin: 0;
+    font-family: var(--font-body-family);
+    font-size: calc(1.6rem * var(--font-body-scale));
+    line-height: 1.5;
+    color: var(--color-text);
+    background-color: var(--color-background);
+  }
+
+
+  .page-width {
+    max-width: var(--page-width);
+    margin: 0 auto;
+    padding: 0 var(--grid-gutter);
+  }
+
+
+  @media screen and (min-width: 750px) {
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      column-gap: var(--grid-gutter);
+    }
+  }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "CSS Variables",
+  "settings": []
+}
+{% endschema %}

@@ -1,5 +1,5 @@
 {
-  "name": "Dawei Kickstart Template",
+  "name": "dawei-kickstart-template",
   "version": "1.0.0",
   "description": "a Modern Shopify kickstart template using Online Store 2.0",
   "scripts": {
@@ -9,7 +9,11 @@
     "deploy": "shopify theme push"
   },
   "dependencies": {
-    "@shopify/theme-scripts": "^9.0.0"
+    "@popperjs/core": "^2.11.8",
+    "@shopify/theme-cart": "^4.1.0",
+    "@shopify/theme-product": "^4.1.0",
+    "@shopify/theme-sections": "^4.1.0",
+    "bootstrap": "^5.3.0"
   },
   "devDependencies": {
     "@shopify/cli": "^3.0.0",

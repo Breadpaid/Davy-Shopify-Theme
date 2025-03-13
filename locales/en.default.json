@@ -3,7 +3,17 @@
     "accessibility": {
       "skip_to_content": "Skip to content",
       "close_modal": "Close",
-      "menu": "Menu"
+      "menu": "Menu",
+      "refresh_page": "Refreshing page",
+      "link_messages": {
+        "new_window": "Opens in a new window.",
+        "external": "Opens external website."
+      },
+      "navigation": {
+        "menu": "Menu",
+        "account": "Account menu",
+        "cart": "Shopping cart"
+      }
     },
     "meta": {
       "tags": "Tagged \"{{ tags }}\"",

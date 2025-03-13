@@ -1,0 +1,74 @@
+// Custom Bootstrap variables
+$primary: #0066cc;
+$secondary: #6c757d;
+$success: #28a745;
+$info: #17a2b8;
+$warning: #ffc107;
+$danger: #dc3545;
+
+// Import Bootstrap
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+// Custom styles
+.btn-shopify {
+  @extend .btn;
+  @extend .btn-primary;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.product-card {
+  @extend .card;
+  border: none;
+  transition: transform 0.2s;
+  
+  &:hover {
+    transform: translateY(-5px);
+  }
+}
+
+.section-header {
+  @extend .py-5;
+  @extend .text-center;
+  background: $light;
+}
+
+// Cart specific styles
+.cart-item {
+  @extend .d-flex;
+  @extend .align-items-center;
+  @extend .mb-3;
+  padding: 1rem;
+  background: $white;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow-sm;
+}
+
+// Collection styles
+.collection-banner {
+  @extend .py-5;
+  @extend .mb-4;
+  background-size: cover;
+  background-position: center;
+  
+  h1 {
+    @extend .display-4;
+    @extend .text-white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  }
+}
+
+// Customer account styles
+.account-sidebar {
+  @extend .list-group;
+  
+  .account-nav-item {
+    @extend .list-group-item;
+    @extend .list-group-item-action;
+    border-left: 3px solid transparent;
+    
+    &.active {
+      border-left-color: $primary;
+    }
+  }
+}

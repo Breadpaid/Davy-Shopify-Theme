@@ -1,0 +1,111 @@
+{
+  "general": {
+    "accessibility": {
+      "skip_to_content": "Skip to content",
+      "close_modal": "Close",
+      "menu": "Menu"
+    },
+    "meta": {
+      "tags": "Tagged \"{{ tags }}\"",
+      "page": "Page {{ page }}"
+    },
+    "404": {
+      "title": "404 Page Not Found",
+      "subtext": "The page you requested does not exist."
+    },
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next",
+      "label": "Pagination"
+    },
+    "password_page": {
+      "login_form_heading": "Enter store using password",
+      "login_form_password_label": "Password",
+      "login_form_submit": "Enter"
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to cart",
+      "sold_out": "Sold out",
+      "unavailable": "Unavailable",
+      "on_sale": "Sale",
+      "quantity": {
+        "label": "Quantity",
+        "increase": "Increase quantity",
+        "decrease": "Decrease quantity"
+      },
+      "price": {
+        "from_price_html": "From {{ price }}",
+        "sale": "Sale"
+      }
+    }
+  },
+  "gift_cards": {
+    "issued": {
+      "title": "Here's your {{ value }} gift card for {{ shop }}!",
+      "balance": "Gift card balance",
+      "number": "Gift card number",
+      "apple_wallet": "Add to Apple Wallet",
+      "expiry": "Expires on {{ expiry }}",
+      "disabled": "Gift card is disabled",
+      "print": "Print this gift card",
+      "shop_link": "Start shopping"
+    }
+  },
+  "cart": {
+    "general": {
+      "title": "Cart",
+      "empty": "Your cart is empty",
+      "subtotal": "Subtotal",
+      "checkout": "Check out",
+      "quantity": "Quantity",
+      "update": "Update Cart",
+      "continue_shopping": "Continue Shopping"
+    }
+  },
+  "collections": {
+    "general": {
+      "products_count": "{{ count }} products",
+      "no_matches": "No products found"
+    },
+    "sorting": {
+      "title": "Sort by"
+    },
+    "filtering": {
+      "apply": "Apply",
+      "clear": "Clear"
+    }
+  },
+  "customer": {
+    "account": {
+      "title": "My Account",
+      "orders": "Order History",
+      "addresses": "Addresses",
+      "details": "Account Details",
+      "view_addresses": "View Addresses"
+    },
+    "orders": {
+      "title": "Order History",
+      "order_number": "Order",
+      "date": "Date",
+      "payment_status": "Payment Status",
+      "fulfillment_status": "Fulfillment Status",
+      "total": "Total",
+      "none": "You haven't placed any orders yet."
+    },
+    "addresses": {
+      "title": "Your Addresses",
+      "default": "Default Address",
+      "edit": "Edit",
+      "delete": "Delete"
+    },
+    "login": {
+      "title": "Login",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Sign In",
+      "register_link": "Create account"
+    }
+  }
+}

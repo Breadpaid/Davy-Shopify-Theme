@@ -1,0 +1,92 @@
+{%- style -%}
+  .customer-login {
+    max-width: 570px;
+    margin: 0 auto;
+    padding: 2rem 0;
+  }
+  .login-form {
+    margin-top: 2rem;
+  }
+  .form-field {
+    margin-bottom: 1.5rem;
+  }
+{%- endstyle -%}
+
+<div class="page-width">
+  <div class="customer-login">
+    <h1>{{ 'customer.login.title' | t }}</h1>
+
+    {%- form 'customer_login', novalidate: 'novalidate' -%}
+      {%- if form.errors -%}
+        <div class="form-message form-message--error">
+          {{ form.errors | default_errors }}
+        </div>
+      {%- endif -%}
+
+      <div class="login-form">
+        <div class="form-field">
+          <label for="CustomerEmail">{{ 'customer.login.email' | t }}</label>
+          <input type="email"
+                 name="customer[email]"
+                 id="CustomerEmail"
+                 autocomplete="email"
+                 autocorrect="off"
+                 autocapitalize="off"
+                 {% if form.errors contains 'form' %}
+                   aria-invalid="true"
+                 {% endif %}
+                 >
+        </div>
+
+        <div class="form-field">
+          <label for="CustomerPassword">{{ 'customer.login.password' | t }}</label>
+          <input type="password"
+                 name="customer[password]"
+                 id="CustomerPassword"
+                 aria-required="true"
+                 {% if form.errors contains 'form' %}
+                   aria-invalid="true"
+                 {% endif %}>
+        </div>
+
+        <button type="submit" class="button">
+          {{ 'customer.login.submit' | t }}
+        </button>
+
+        <a href="{{ routes.account_register_url }}">
+          {{ 'customer.login.register_link' | t }}
+        </a>
+      </div>
+    {%- endform -%}
+
+    {%- if section.settings.show_social_login -%}
+      <div class="social-login">
+        {%- if shop.enabled_payment_types contains 'google_pay' -%}
+          <button class="social-login__button">
+            Continue with Google
+          </button>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Customer Login",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_social_login",
+      "label": "Show social login buttons",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_guest_checkout",
+      "label": "Enable guest checkout",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

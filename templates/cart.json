@@ -1,0 +1,17 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-cart",
+      "settings": {}
+    },
+    "recommendations": {
+      "type": "cart-recommendations",
+      "settings": {
+        "heading": "You may also like",
+        "show_product_price": true,
+        "show_vendor": false
+      }
+    }
+  },
+  "order": ["main", "recommendations"]
+}

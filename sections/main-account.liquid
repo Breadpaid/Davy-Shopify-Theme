@@ -1,0 +1,128 @@
+{%- style -%}
+  .customer-account {
+    padding: 2rem 0;
+  }
+  .account-details {
+    margin-bottom: 2rem;
+  }
+  .orders-list {
+    margin-top: 2rem;
+  }
+  .address-list {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+{%- endstyle -%}
+
+<div class="page-width">
+  <div class="customer-account">
+    <h1>{{ 'customer.account.title' | t }}</h1>
+
+    {%- if section.settings.show_account_details -%}
+      <div class="account-details">
+        <h2>{{ 'customer.account.details' | t }}</h2>
+        <p>{{ customer.email }}</p>
+        <a href="{{ routes.account_addresses_url }}" class="button button--secondary">
+          {{ 'customer.account.view_addresses' | t }} ({{ customer.addresses_count }})
+        </a>
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.show_order_history -%}
+      <div class="orders-list">
+        <h2>{{ 'customer.orders.title' | t }}</h2>
+        
+        {%- paginate customer.orders by 20 -%}
+          {%- if customer.orders.size > 0 -%}
+            <table>
+              <thead>
+                <tr>
+                  <th>{{ 'customer.orders.order_number' | t }}</th>
+                  <th>{{ 'customer.orders.date' | t }}</th>
+                  <th>{{ 'customer.orders.payment_status' | t }}</th>
+                  <th>{{ 'customer.orders.fulfillment_status' | t }}</th>
+                  <th>{{ 'customer.orders.total' | t }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {%- for order in customer.orders -%}
+                  <tr>
+                    <td>
+                      <a href="{{ order.customer_url }}">{{ order.name }}</a>
+                    </td>
+                    <td>{{ order.created_at | time_tag: format: 'date' }}</td>
+                    <td>{{ order.financial_status_label }}</td>
+                    <td>{{ order.fulfillment_status_label }}</td>
+                    <td>{{ order.total_price | money }}</td>
+                  </tr>
+                {%- endfor -%}
+              </tbody>
+            </table>
+
+            {%- if paginate.pages > 1 -%}
+              {%- render 'pagination', paginate: paginate -%}
+            {%- endif -%}
+          {%- else -%}
+            <p>{{ 'customer.orders.none' | t }}</p>
+          {%- endif -%}
+        {%- endpaginate -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.show_addresses and customer.addresses_count > 0 -%}
+      <div class="address-list">
+        <h2>{{ 'customer.addresses.title' | t }}</h2>
+        {%- for address in customer.addresses -%}
+          <div class="address-card">
+            {%- if address == customer.default_address -%}
+              <div class="address-card__default">{{ 'customer.addresses.default' | t }}</div>
+            {%- endif -%}
+            {{ address | format_address }}
+            <div class="address-card__actions">
+              <button type="button" 
+                      class="button button--secondary"
+                      aria-label="{{ 'customer.addresses.edit' | t }}"
+                      data-address-id="{{ address.id }}">
+                {{ 'customer.addresses.edit' | t }}
+              </button>
+              <button type="button"
+                      class="button button--secondary"
+                      aria-label="{{ 'customer.addresses.delete' | t }}"
+                      data-address-id="{{ address.id }}">
+                {{ 'customer.addresses.delete' | t }}
+              </button>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Account Page",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_order_history",
+      "label": "Show order history",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_account_details",
+      "label": "Show account details",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_addresses",
+      "label": "Show addresses",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

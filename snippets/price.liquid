@@ -1,0 +1,18 @@
+{%- if product.price_varies -%}
+  <span class="price-item price-item--regular">
+    {{ 'products.product.price.from_price_html' | t: price: product.price_min | money }}
+  </span>
+{%- else -%}
+  <span class="price-item price-item--regular">
+    {{ product.price | money }}
+  </span>
+{%- endif -%}
+
+{%- if product.compare_at_price > product.price -%}
+  <span class="price-item price-item--sale">
+    {{ product.compare_at_price | money }}
+  </span>
+  <span class="price-item__badge">
+    {{ 'products.product.price.sale' | t }}
+  </span>
+{%- endif -%}

@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-account",
+      "settings": {
+        "show_order_history": true,
+        "show_account_details": true,
+        "show_addresses": true
+      }
+    }
+  },
+  "order": ["main"]
+}

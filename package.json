@@ -1,0 +1,21 @@
+{
+  "name": "Dawei Kickstart Template",
+  "version": "1.0.0",
+  "description": "a Modern Shopify kickstart template using Online Store 2.0",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "shopify theme dev",
+    "build": "shopify theme build",
+    "deploy": "shopify theme push"
+  },
+  "dependencies": {
+    "@shopify/theme-scripts": "^9.0.0"
+  },
+  "devDependencies": {
+    "@shopify/cli": "^3.0.0",
+    "@shopify/theme-lint": "^3.0.0",
+    "eslint": "^8.0.0",
+    "prettier": "^2.8.0",
+    "sass": "^1.45.0"
+  }
+}

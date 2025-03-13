@@ -1,0 +1,207 @@
+{% schema %}
+{
+  "name": "Featured Collection",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Featured Products"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 12,
+      "step": 2,
+      "default": 4,
+      "label": "Products to show"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "default": true,
+      "label": "Show 'View all' button"
+    },
+    {
+      "type": "checkbox",
+      "id": "swipe_on_mobile",
+      "default": true,
+      "label": "Enable swipe on mobile"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "Adapt to image"
+        },
+        {
+          "value": "square",
+          "label": "Square"
+        }
+      ],
+      "default": "adapt",
+      "label": "Image ratio"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_secondary_image",
+      "default": false,
+      "label": "Show second image on hover"
+    },
+    {
+      "type": "checkbox",
+      "id": "add_image_padding",
+      "default": false,
+      "label": "Add image padding"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "default": false,
+      "label": "Show product vendor"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Collection",
+      "category": "Collection"
+    }
+  ]
+}
+{% endschema %}
+
+<div class="featured-collection">
+  {% if section.settings.title != blank %}
+    <h2>{{ section.settings.title }}</h2>
+  {% endif %}
+
+  {%- assign collection = collections[section.settings.collection] -%}
+
+  {% if collection != blank %}
+    <div class="products-grid{% if section.settings.swipe_on_mobile %} swipe-enabled{% endif %}">
+      {% for product in collection.products limit: section.settings.products_to_show %}
+        <div class="product-card">
+          <a href="{{ product.url }}">
+            <div
+              class="product-card__image{% if section.settings.add_image_padding %} with-padding{% endif %}"
+              style="{% if section.settings.image_ratio == 'square' %}padding-bottom: 100%;{% endif %}"
+            >
+              {% if product.featured_image != blank %}
+                {{ product.featured_image | image_url: width: 400 | image_tag: loading: 'lazy' }}
+                {% if section.settings.show_secondary_image and product.images[1] != blank %}
+                  {{ product.images[1] | image_url: width: 400 | image_tag: class: 'secondary-image', loading: 'lazy' }}
+                {% endif %}
+              {% endif %}
+            </div>
+
+            <div class="product-card__info">
+              {% if section.settings.show_vendor %}
+                <p class="product-card__vendor">{{ product.vendor }}</p>
+              {% endif %}
+
+              <h3 class="product-card__title">{{ product.title }}</h3>
+              <p class="product-card__price">{{ product.price | money }}</p>
+            </div>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+
+    {% if section.settings.show_view_all %}
+      <div class="view-all">
+        <a href="{{ collection.url }}" class="button">View all</a>
+      </div>
+    {% endif %}
+  {% endif %}
+</div>
+
+{% stylesheet %}
+  .featured-collection {
+    padding: 2rem 0;
+  }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+  }
+
+  .product-card {
+    position: relative;
+  }
+
+  .product-card__image {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .product-card__image.with-padding {
+    padding: 1rem;
+  }
+
+  .product-card__image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .secondary-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .product-card:hover .secondary-image {
+    opacity: 1;
+  }
+
+  .product-card__info {
+    padding: 1rem 0;
+  }
+
+  .product-card__vendor {
+    font-size: 0.9em;
+    color: #666;
+  }
+
+  .product-card__title {
+    margin: 0.5rem 0;
+  }
+
+  .product-card__price {
+    font-weight: bold;
+  }
+
+  .view-all {
+    text-align: center;
+    margin-top: 2rem;
+  }
+
+  @media screen and (max-width: 768px) {
+    .swipe-enabled {
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .swipe-enabled .product-card {
+      flex: 0 0 250px;
+      scroll-snap-align: start;
+    }
+  }
+{% endstylesheet %}

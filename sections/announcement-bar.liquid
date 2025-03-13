@@ -1,0 +1,76 @@
+{%- for block in section.blocks -%}
+  {%- case block.type -%}
+    {%- when 'announcement' -%}
+      <div
+        class="announcement-bar"
+        {% if block.settings.background_color != blank %}
+          style="background-color: {{ block.settings.background_color }};"
+        {% endif %}
+      >
+        <div class="page-width">
+          <p
+            class="announcement-bar__message"
+            {% if block.settings.text_color != blank %}
+              style="color: {{ block.settings.text_color }};"
+            {% endif %}
+          >
+            {{ block.settings.text | escape }}
+          </p>
+        </div>
+      </div>
+  {%- endcase -%}
+{%- endfor -%}
+
+{% schema %}
+{
+  "name": "Announcement bar",
+  "max_blocks": 12,
+  "blocks": [
+    {
+      "type": "announcement",
+      "name": "Announcement",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "default": "Welcome to our store",
+          "label": "Text"
+        },
+        {
+          "type": "color",
+          "id": "background_color",
+          "default": "#000000",
+          "label": "Background"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "default": "#FFFFFF",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      {
+        "type": "announcement"
+      }
+    ]
+  }
+}
+{% endschema %}
+
+{% stylesheet %}
+  .announcement-bar {
+    padding: 10px 0;
+    text-align: center;
+    background-color: var(--color-primary);
+  }
+
+  .announcement-bar__message {
+    margin: 0;
+    font-size: 0.875rem;
+    color: #fff;
+  }
+{% endstylesheet %}

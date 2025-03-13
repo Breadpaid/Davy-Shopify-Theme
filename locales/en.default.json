@@ -3,7 +3,8 @@
     "accessibility": {
       "skip_to_content": "Skip to content",
       "close_modal": "Close",
-      "menu": "Menu"
+      "menu": "Menu",
+      "refresh_page": "Refreshing page"
     },
     "meta": {
       "tags": "Tagged \"{{ tags }}\"",

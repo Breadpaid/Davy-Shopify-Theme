@@ -2,7 +2,7 @@
 
 A minimalist Shopify theme starter template built with Online Store 2.0. This template provides basic styling and error-free page rendering to help you kickstart your Shopify theme development.
 
-This template will also have two features in different branch, one is tailwind support, the other is bootstrap support.
+This template is one of the branch which support tailwind css.
 
 ## Quick Start
 

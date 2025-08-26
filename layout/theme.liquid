@@ -4,8 +4,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="theme-color" content="">
+    <meta name="theme-color" content="{{ settings.primary_color }}">
     <link rel="canonical" href="{{ canonical_url }}">
+    <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
 
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
@@ -19,7 +21,42 @@
     {{ content_for_header }}
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
-    {{ 'theme.js' | asset_url | script_tag }}
+    <style>
+      :root {
+        --font-stack-header: {{ settings.heading_font.family | default: 'Helvetica, Arial, sans-serif' }};
+        --font-stack-body: {{ settings.body_font.family | default: 'Helvetica, Arial, sans-serif' }};
+        --color-primary: {{ settings.primary_color | default: '#000000' }};
+        --color-secondary: {{ settings.secondary_color | default: '#ffffff' }};
+        --color-primary-hex: {{ settings.primary_color | default: '#000000' }};
+        --color-secondary-hex: {{ settings.secondary_color | default: '#ffffff' }};
+        --color-primary-rgb: {{ settings.primary_color | color_to_rgb | replace: 'rgb(', '' | replace: ')', '' }};
+        --color-secondary-rgb: {{ settings.secondary_color | color_to_rgb | replace: 'rgb(', '' | replace: ')', '' }};
+      }
+    </style>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "{{ shop.name | escape }}",
+        "url": "{{ shop.primary_domain.url }}",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "{{ shop.primary_domain.url }}/search?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script>
+    {% if settings.favicon != blank %}
+      <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "{{ shop.name | escape }}",
+          "url": "{{ shop.primary_domain.url }}",
+          "logo": {{ settings.favicon | image_url: width: 256 | json }}
+        }
+      </script>
+    {% endif %}
   </head>
 
   <body class="gradient">
@@ -33,7 +70,9 @@
     {% section 'footer' %}
 
     <ul hidden>
-      <li id="a11y-refresh-page-message">{{ 'accessibility.refresh_page' | t }}</li>
+      <li id="a11y-refresh-page-message">{{ 'general.accessibility.refresh_page' | t }}</li>
     </ul>
+
+    <script defer src="{{ 'theme.js' | asset_url }}"></script>
   </body>
 </html>

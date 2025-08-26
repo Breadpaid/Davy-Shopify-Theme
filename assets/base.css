@@ -1,6 +1,6 @@
 :root {
-  --font-body-family: var(--font-stack-body);
-  --font-heading-family: var(--font-stack-header);
+  --font-body-family: 'Helvetica', Arial, sans-serif;
+  --font-heading-family: 'Helvetica', Arial, sans-serif;
   
   --color-base-text: 18, 18, 18;
   --color-base-background-1: 255, 255, 255;

@@ -3,7 +3,8 @@
     "accessibility": {
       "skip_to_content": "Skip to content",
       "close_modal": "Close",
-      "menu": "Menu"
+      "menu": "Menu",
+      "refresh_page": "Refresh page"
     },
     "meta": {
       "tags": "Tagged \"{{ tags }}\"",
@@ -75,6 +76,9 @@
     "filtering": {
       "apply": "Apply",
       "clear": "Clear"
+    },
+    "related": {
+      "heading": "You may also like"
     }
   },
   "customer": {

@@ -21,35 +21,23 @@
       "type": "select",
       "id": "image_ratio",
       "options": [
-        {
-          "value": "square",
-          "label": "Square"
-        },
-        {
-          "value": "portrait",
-          "label": "Portrait"
-        },
-        {
-          "value": "landscape",
-          "label": "Landscape"
-        }
+        { "value": "square", "label": "Square" },
+        { "value": "portrait", "label": "Portrait" },
+        { "value": "landscape", "label": "Landscape" }
       ],
       "default": "square",
       "label": "Image ratio"
     }
   ],
-  "presets": [
-    {
-      "name": "Related Products",
-      "category": "Product"
-    }
-  ]
+  "presets": [{ "name": "Related Products" }]
 }
 {% endschema %}
 
-<div class="related-products">
+<div id="section-{{ section.id }}" class="related-products">
   {% if section.settings.heading != blank %}
     <h2>{{ section.settings.heading }}</h2>
+  {% else %}
+    <h2>{{ 'collections.related.heading' | t }}</h2>
   {% endif %}
 
   {%- assign current_product = product -%}
@@ -63,7 +51,21 @@
             <a href="{{ related_product.url }}">
               <div class="product-card__image image-ratio--{{ section.settings.image_ratio }}">
                 {% if related_product.featured_image != blank %}
-                  {{ related_product.featured_image | image_url: width: 400 | image_tag: loading: 'lazy' }}
+                  {% assign rp_thumb_width = 400 %}
+                  {% assign rp_thumb_height = rp_thumb_width
+                    | divided_by: related_product.featured_image.aspect_ratio
+                    | round
+                  %}
+                  {{
+                    related_product.featured_image
+                    | image_url: width: rp_thumb_width
+                    | image_tag: loading: 'lazy', alt: related_product.featured_image.alt
+                    | default: related_product.title,
+                      width: rp_thumb_width,
+                      height: rp_thumb_height,
+                      sizes: '(max-width: 600px) 50vw, 400px',
+                      widths: '200,300,400'
+                  }}
                 {% endif %}
               </div>
 
@@ -80,40 +82,40 @@
 </div>
 
 {% stylesheet %}
-  .related-products {
+  #section-{{ section.id }} .related-products {
     padding: 2rem 0;
   }
 
-  .products-grid {
+  #section-{{ section.id }} .products-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 2rem;
     margin: 2rem 0;
   }
 
-  .product-card {
+  #section-{{ section.id }} .product-card {
     position: relative;
   }
 
-  .product-card__image {
+  #section-{{ section.id }} .product-card__image {
     position: relative;
     width: 100%;
     overflow: hidden;
   }
 
-  .image-ratio--square {
+  #section-{{ section.id }} .image-ratio--square {
     padding-bottom: 100%;
   }
 
-  .image-ratio--portrait {
+  #section-{{ section.id }} .image-ratio--portrait {
     padding-bottom: 125%;
   }
 
-  .image-ratio--landscape {
+  #section-{{ section.id }} .image-ratio--landscape {
     padding-bottom: 75%;
   }
 
-  .product-card__image img {
+  #section-{{ section.id }} .product-card__image img {
     position: absolute;
     top: 0;
     left: 0;
@@ -122,21 +124,21 @@
     object-fit: cover;
   }
 
-  .product-card__info {
+  #section-{{ section.id }} .product-card__info {
     padding: 1rem 0;
   }
 
-  .product-card__title {
+  #section-{{ section.id }} .product-card__title {
     margin: 0.5rem 0;
     font-size: 1rem;
   }
 
-  .product-card__price {
+  #section-{{ section.id }} .product-card__price {
     font-weight: bold;
   }
 
   @media screen and (max-width: 768px) {
-    .products-grid {
+    #section-{{ section.id }} .products-grid {
       grid-template-columns: repeat(2, 1fr);
       gap: 1rem;
     }

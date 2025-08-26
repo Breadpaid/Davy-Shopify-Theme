@@ -1,11 +1,11 @@
 {%- style -%}
-  .cart {
+  #section-{{ section.id }} .cart {
     padding: 2rem 0;
   }
 {%- endstyle -%}
 
 <div class="page-width">
-  <div class="cart">
+  <div id="section-{{ section.id }}" class="cart">
     {%- if cart.item_count > 0 -%}
       <form action="{{ routes.cart_url }}" method="post" id="cart">
         <table>
@@ -13,7 +13,7 @@
             <tr>
               <th>Product</th>
               <th>Price</th>
-              <th>Quantity</th>
+              <th>{{ 'cart.general.quantity' | t }}</th>
               <th>Total</th>
             </tr>
           </thead>
@@ -23,7 +23,16 @@
                 <td>
                   <div class="cart-item">
                     {%- if item.image -%}
-                      <img src="{{ item.image | img_url: '120x' }}" alt="{{ item.title | escape }}">
+                      {% assign thumb_width = 120 %}
+                      {% assign thumb_height = thumb_width | divided_by: item.image.aspect_ratio | round %}
+                      <img
+                        src="{{ item.image | img_url: '120x' }}"
+                        alt="{{ item.image.alt | default: item.title | escape }}"
+                        loading="lazy"
+                        width="{{ thumb_width }}"
+                        height="{{ thumb_height }}"
+                        class="cart-item__image"
+                      >
                     {%- endif -%}
                     <div>
                       <a href="{{ item.url }}">{{ item.product.title }}</a>
@@ -35,11 +44,13 @@
                 </td>
                 <td>{{ item.price | money }}</td>
                 <td>
-                  <input type="number" 
-                         name="updates[]" 
-                         value="{{ item.quantity }}" 
-                         min="0" 
-                         aria-label="{{ 'cart.general.quantity' | t }}">
+                  <input
+                    type="number"
+                    name="updates[]"
+                    value="{{ item.quantity }}"
+                    min="0"
+                    aria-label="{{ 'cart.general.quantity' | t }}"
+                  >
                 </td>
                 <td>{{ item.final_line_price | money }}</td>
               </tr>
